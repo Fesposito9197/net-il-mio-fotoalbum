@@ -1,8 +1,54 @@
-﻿@{
+﻿@model Foto[]
+
+
+@{
+
     ViewData["Title"] = "Home Page";
+    var fotos = Model;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center container">
+    <table class="table">
+        <thead>
+
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var foto in fotos)
+            {
+                <tr>
+                    <td>@foto.Id</td>
+                    <td class="fw-bold">
+                        <a class="text-decoration-none" href="@Url.Action("Detail", "Home", new {Id = foto.Id})">@foto.Title</a>
+                    </td>
+                    <td class="fw-bold">@foto.Description</td>
+                    
+                    
+                    
+                        <td class=" fw-bold">
+                        <a class="btn btn-warning mb-1" href="@Url.Action("Update", "Home", new {Id = foto.Id})"><i class="fa-solid fa-pencil" style="color: #000000;"></i></a>
+
+                        <form method="post" asp-controller="Home" asp-action="Delete" asp-route-id="@foto.Id">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-solid fa-dumpster-fire" style="color: #000000;"></i>
+                                </button>
+                            </form>
+
+                        </td>
+
+                    
+
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
 </div>

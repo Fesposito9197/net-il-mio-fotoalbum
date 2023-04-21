@@ -20,7 +20,29 @@ namespace net_il_mio_fotoalbum.Models
                     Description = "Foto che ritrae il mare",
                     FotoUrl = "https://www.touringclub.it/sites/default/files/styles/gallery_full/public/immagini_georiferite/gettyimages-649067370.jpg?itok=BgjbldQE",
                     IsVisible = true,
-                }
+                },
+                new Foto
+                {
+                    Title = "Foto cane",
+                    Description = "Foto che ritrae un cane",
+                    FotoUrl = "https://www.touringclub.it/sites/default/files/styles/gallery_full/public/immagini_georiferite/gettyimages-649067370.jpg?itok=BgjbldQE",
+                    IsVisible = false,
+                },
+                new Foto
+                {
+                    Title = "Foto evento",
+                    Description = "Foto che ritrae un evento",
+                    FotoUrl = "https://www.touringclub.it/sites/default/files/styles/gallery_full/public/immagini_georiferite/gettyimages-649067370.jpg?itok=BgjbldQE",
+                    IsVisible = true,
+                },
+                new Foto
+                {
+                    Title = "Foto persone",
+                    Description = "Foto che ritrae delle persone",
+                    FotoUrl = "https://www.touringclub.it/sites/default/files/styles/gallery_full/public/immagini_georiferite/gettyimages-649067370.jpg?itok=BgjbldQE",
+                    IsVisible = true,
+                },
+
             };
             if (!Fotos.Any())
             {
@@ -39,6 +61,14 @@ namespace net_il_mio_fotoalbum.Models
                     {
                         Name = "Animali"
                     },
+                    new()
+                    {
+                        Name = "Eventi"
+                    },
+                    new()
+                    {
+                        Name = "Persone"
+                    }
                 };
                 Categories.AddRange(seed);
             }

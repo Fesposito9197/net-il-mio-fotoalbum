@@ -8,11 +8,11 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+html{
+    position:relative;
+    min-height:100%;
 }
 
-body {
-  margin-bottom: 60px;
+body{
+    height:calc(100vh - 56px);
 }

@@ -1,0 +1,27 @@
+﻿@model Foto
+
+@{
+    var foto = Model;
+}
+<div class="d-flex justify-content-center">
+
+    <div class="card mt-3" style="width: 18rem;">
+        <img src="@foto.FotoUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@foto.Title</h5>
+            <p class="card-text">@foto.Description</p>
+            <p class="card-text">
+                categorie:
+                @foreach (Category category in foto.Categories)
+                {
+                    <ul>
+                        <li>
+                            @category.Name
+                        </li>
+                    </ul>
+                }
+            </p>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Torna alla Home</a>
+        </div>
+    </div>
+</div>   
