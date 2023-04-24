@@ -18,6 +18,30 @@ namespace net_il_mio_fotoalbum.Controllers
             return View(categories);
         }
 
+        [HttpGet]
+        public IActionResult Create() 
+        {
+            var formModel = new CategoryFormModel();
+
+            return View(formModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(CategoryFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            _context.Categories.Add(model.category);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

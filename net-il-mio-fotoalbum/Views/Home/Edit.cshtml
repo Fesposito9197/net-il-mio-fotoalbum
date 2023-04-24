@@ -1,11 +1,12 @@
 ﻿@model FotoFormModel
 @{
-    ViewData["title"] = "Inserisci Foto";
+    ViewData["title"] = "Modifica la Foto";
     var fotoform = Model;
 }
+
 <div class="container text-center mt-3">
     <div class="d-flex justify-content-center">
-        <form method="post" asp-controller="Home" asp-action="Create">
+        <form method="post" asp-controller="Home" asp-action="Edit" asp-route-id="@fotoform.Foto.Id">
             @Html.AntiForgeryToken()
             <div class="mb-3">
                 <label asp-for="Foto.Title" class="form-label"></label>
@@ -31,20 +32,10 @@
                 <label for="SelectedCategoriesIds">Categorie</label>
                 @foreach (var category in fotoform.Categories)
                 {
-                    <input value="@category.Id" id="@category.Id" name="SelectedCategoriesIds" type="checkbox" />
-                    <label class="" for="@category.Id">@category.Name</label>
+                    <input value="@category.Id" id="@category.Id" checked="@fotoform.SelectedCategoriesIds.Contains(category.Id)" name="SelectedCategoriesIds" type="checkbox" />
+                    <label class="ms-2" for="@category.Id">@category.Name</label>
                 }
             </div>
-            
-           @* <div class="mb-3">
-                <label asp-for="Foto.Categories"></label>
-                <select asp-for="SelectedCategoriesIds"
-                        multiple
-                        size="5"
-                        class="form-control"
-                        asp-items="@fotoform.">
-                </select>
-            </div>*@
             <button type="submit" class="btn btn-success">Create</button>
         </form>
     </div>

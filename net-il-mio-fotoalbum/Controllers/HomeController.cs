@@ -42,19 +42,23 @@ namespace net_il_mio_fotoalbum.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-
-            var model = new FotoFormModel();
-            List<SelectListItem> listCategorie = new List<SelectListItem>();
-            
-            foreach (var categorie in _context.Categories)
+            var formModel = new FotoFormModel
             {
-                listCategorie.Add(new SelectListItem()
-                { Text = categorie.Name, Value = categorie.Id.ToString() });
-            }
-            model.Foto = new Foto();
-            model.Categories = listCategorie;
+                Categories = _context.Categories.ToArray(),
+            };
 
-            return View("Create",model);
+            //var model = new FotoFormModel();
+            //List<SelectListItem> listCategorie = new List<SelectListItem>();
+            
+            //foreach (var categorie in _context.Categories)
+            //{
+            //    listCategorie.Add(new SelectListItem()
+            //    { Text = categorie.Name, Value = categorie.Id.ToString() });
+            //}
+            //model.Foto = new Foto();
+            //model.Categories = listCategorie;
+
+            return View("Create",formModel);
 
         }
 
@@ -64,16 +68,64 @@ namespace net_il_mio_fotoalbum.Controllers
         {
             if (!ModelState.IsValid)
             {
-                form.Categories = _context.Categories.Select(c => new SelectListItem(c.Name, c.Id.ToString())).ToArray();
+                form.Categories = _context.Categories.ToArray();
 
                 return View(form);
             }
-            form.Foto.Categories = form.SelectedCategories.Select(sc => _context.Categories.First(c => c.Id == Convert.ToInt32(sc))).ToList();
+            form.Foto.Categories = form.SelectedCategoriesIds.Select(sc => _context.Categories.First(c => c.Id == Convert.ToInt32(sc))).ToList();
             _context.Fotos.Add(form.Foto);
             _context.SaveChanges();
             return RedirectToAction("Index");
           
 
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var foto = _context.Fotos.Include(f => f.Categories).FirstOrDefault(f => f.Id == id);
+
+            if (foto == null)
+            {
+                return NotFound();
+            }
+
+            var formModel = new FotoFormModel
+            {
+                Foto = foto,
+                Categories = _context.Categories.ToArray(),
+                SelectedCategoriesIds = foto.Categories.Select(c => c.Id).ToList(),
+
+
+            };
+            return View(formModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit( int id , FotoFormModel form)
+        {
+            if (!ModelState.IsValid)
+            {
+                form.Categories = _context.Categories.ToArray();
+
+                return View(form);
+            }
+
+            var SavedFoto = _context.Fotos.Include(f=> f.Categories).FirstOrDefault(c => c.Id == id);
+
+            if (SavedFoto == null)
+            {
+                return NotFound();
+            }
+
+            SavedFoto.Title = form.Foto.Title;
+            SavedFoto.Title = form.Foto.Description;
+            SavedFoto.FotoUrl = form.Foto.FotoUrl;
+            SavedFoto.IsVisible = form.Foto.IsVisible;
+            SavedFoto.Categories = _context.Categories.Where(c => form.SelectedCategoriesIds.Contains(c.Id)).ToList();
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
