@@ -39,7 +39,20 @@ const initFilter = () => {
     filter.addEventListener("input", (e) => loadFoto(e.target.value));
 
 }                   
-                    
-        
+
+function formSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById("user-email").value;
+    const message = document.getElementById("user-message").value;
+
+    console.log(email , message)
+
+    axios.post("/api/userinfo", { email : email, message : message })
+        .then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.error(err);
+        });
+}
 
        

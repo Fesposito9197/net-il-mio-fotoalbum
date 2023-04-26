@@ -10,6 +10,8 @@ namespace net_il_mio_fotoalbum.Models
         public DbSet<Foto> Fotos { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<UserForm> UserForms { get; set; }
+
         public void Seed()
         {
             var fotos = new Foto[]

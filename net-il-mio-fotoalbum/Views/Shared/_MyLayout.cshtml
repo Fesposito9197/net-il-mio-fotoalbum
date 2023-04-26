@@ -22,8 +22,9 @@
     </head>
     <body>
     
-            <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow">
+            <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow justify-content-start">
                 <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="@Url.Action("Index", "Home")">My Album</a>
+                <partial name="_LoginPartial" />
                @* <button class="navbar-toggler position-absolute d-md-none collapsed"
                         type="button"
                         data-bs-toggle="collapse"
@@ -33,11 +34,10 @@
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>*@
-                <input class="form-control form-control-dark w-100"
+@*                <input class="form-control form-control-dark w-100"
                        type="text"
                        placeholder="Search"
-                       aria-label="Search" />
-                       <partial name="_LoginPartial" />
+                       aria-label="Search" />*@
             </header>
 
             <div class="container-fluid h-100">

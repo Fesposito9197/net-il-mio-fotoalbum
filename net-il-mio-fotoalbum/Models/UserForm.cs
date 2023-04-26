@@ -9,6 +9,6 @@ namespace net_il_mio_fotoalbum.Models
         public string Email { get; set; } = string.Empty;
 
         [Column(TypeName = "text")]
-        public string UserMessage { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
     }
 }
