@@ -19,10 +19,10 @@
             </tr>
 
         </thead>
-        <tbody>
-            @foreach (var foto in fotos)
+        <tbody id="ms-fotos">
+           @* @foreach (var foto in fotos)
             {
-                <tr>
+                <tr >
                     <td>@foto.Id</td>
                     <td class="fw-bold">
                         <a class="text-decoration-none" href="@Url.Action("Detail", "Home", new {Id = foto.Id})">@foto.Title</a>
@@ -40,15 +40,28 @@
                                     <i class="fa-solid fa-dumpster-fire" style="color: #000000;"></i>
                                 </button>
                             </form>
-
                         </td>
-
-                    
-
                 </tr>
-
-            }
-
+            }*@
+            
         </tbody>
     </table>
 </div>
+
+
+
+@section Scripts 
+{
+    <script>
+        const fotos = getFotos()
+        .then(res => {
+            const fotos = res.data;
+            renderFotos(fotos);
+           console.log(fotos)
+        })
+    </script>
+}
+
+                    
+
+

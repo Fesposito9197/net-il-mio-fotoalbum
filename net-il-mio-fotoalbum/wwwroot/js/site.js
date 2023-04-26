@@ -1,4 +1,28 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const getFotos = () => axios.get("api/foto")
 
-// Write your JavaScript code.
+
+const renderFotos = fotos => {
+    const fotosBody = document.querySelector("#ms-fotos");
+    fotosBody.innerHTML = fotos.map(fotoComponent).join("")
+}
+
+const fotoComponent = foto =>
+    ` 
+    <tr>
+        <td>${foto.id}</td>
+        <td class="fw-bold">
+            <a class="text-decoration-none text-black" >${foto.title}</a>
+        </td>
+        <td class="fw-bold">${foto.description}</td>
+        <td class=" fw-bold">
+         <a href = "/Home/detail/${foto.id}" class="btn btn-success" > Dettagli </a>
+        </td>
+
+    </tr>
+`;
+                    
+                    
+                    
+        
+
+       

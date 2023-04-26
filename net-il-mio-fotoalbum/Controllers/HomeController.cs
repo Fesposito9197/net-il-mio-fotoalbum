@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,6 +20,11 @@ namespace net_il_mio_fotoalbum.Controllers
         {
             _logger = logger;
             _context = context;
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
         }
 
         public IActionResult Index()
@@ -38,7 +45,7 @@ namespace net_il_mio_fotoalbum.Controllers
             return View(foto);
         }
 
-
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -61,7 +68,7 @@ namespace net_il_mio_fotoalbum.Controllers
             return View("Create",formModel);
 
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(FotoFormModel form)
@@ -79,7 +86,7 @@ namespace net_il_mio_fotoalbum.Controllers
           
 
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var foto = _context.Fotos.Include(f => f.Categories).FirstOrDefault(f => f.Id == id);
@@ -99,7 +106,7 @@ namespace net_il_mio_fotoalbum.Controllers
             };
             return View(formModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit( int id , FotoFormModel form)
@@ -127,7 +134,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
