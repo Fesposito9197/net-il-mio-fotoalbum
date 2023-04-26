@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using net_il_mio_fotoalbum.Models;
 
 namespace net_il_mio_fotoalbum.Controllers.ApiControllers
@@ -15,6 +16,7 @@ namespace net_il_mio_fotoalbum.Controllers.ApiControllers
             _context = context;
         }
 
+       
         //[HttpPost]
         //public IActionResult CreateUserInfo() 
         //{

@@ -8,6 +8,10 @@
 }
 
 <div class="text-center container">
+    <div id="fotos-filter" class="mt-3">
+        <label>Filtra per titolo</label>
+        <input placeholder="filter" />
+    </div>
     <table class="table">
         <thead>
 
@@ -53,12 +57,14 @@
 @section Scripts 
 {
     <script>
-        const fotos = getFotos()
-        .then(res => {
-            const fotos = res.data;
-            renderFotos(fotos);
-           console.log(fotos)
-        })
+       loadFoto();
+       initFilter();
+        //getFotos()
+        //.then(res => {
+        //    const fotos = res.data;
+        //    renderFotos(fotos);
+           
+        //})
     </script>
 }
 

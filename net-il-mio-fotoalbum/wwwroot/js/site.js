@@ -1,4 +1,17 @@
-﻿const getFotos = () => axios.get("api/foto")
+﻿
+const loadFoto = (filter) => {
+    
+    getFotos(filter)
+    .then(res => {
+    const fotos = res.data;
+    renderFotos(fotos);
+    })
+}
+
+
+
+const getFotos = name => axios.get("api/foto", name ? { params: { name } } : { });
+
 
 
 const renderFotos = fotos => {
@@ -21,7 +34,11 @@ const fotoComponent = foto =>
     </tr>
 `;
                     
-                    
+const initFilter = () => {
+    const filter = document.querySelector("#fotos-filter input");
+    filter.addEventListener("input", (e) => loadFoto(e.target.value));
+
+}                   
                     
         
 
