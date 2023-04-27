@@ -8,22 +8,22 @@
         <form method="post" asp-controller="Home" asp-action="Create">
             @Html.AntiForgeryToken()
             <div class="mb-3">
-                <label asp-for="Foto.Title" class="form-label"></label>
+                <label asp-for="Foto.Title" class="form-label">Inserisci un titolo:</label>
                 <input asp-for="Foto.Title" class="form-control" />
                 <span asp-validation-for="Foto.Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Foto.Description" class="form-label"></label>
+                <label asp-for="Foto.Description" class="form-label">Aggiungi una descrizione:</label>
                 <textarea asp-for="Foto.Description" class="form-control"></textarea>
                 <span asp-validation-for="Foto.Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Foto.FotoUrl" class="form-label"></label>
+                <label asp-for="Foto.FotoUrl" class="form-label">Inserisci percorso foto:</label>
                 <input type="text" asp-for="Foto.FotoUrl" class="form-control" />
                 <span asp-validation-for="Foto.FotoUrl" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Foto.IsVisible" class="form-label"></label>
+                <label asp-for="Foto.IsVisible" class="form-label">La foto sarà visibile?</label>
                 <input type="checkbox" asp-for="Foto.IsVisible" class="form-check-input" value="true" />
                 <span asp-validation-for="Foto.IsVisible" class="text-danger"></span>
             </div>
